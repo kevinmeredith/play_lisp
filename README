@@ -1,4 +1,12 @@
-This is your new Play application
-=====================================
+# LISP REPL Play Framework App
 
-This file will be packaged with your application, when using `play dist`.
+This is a web-app that acts as a LISP REPL.
+
+## How to Run
+
+1. Get the LISP REPL - `git clone https://github.com/kevinmeredith/lisp_interpretter.git`
+2. Publish the JAR locally:
+	* `cd lisp_interpretter`
+	* `sbt`
+	* `publish-local`
+3. Get this project: - `git clone 
