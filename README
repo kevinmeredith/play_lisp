@@ -10,3 +10,9 @@ This is a web-app that acts as a LISP REPL.
 	* `sbt`
 	* `publish-local`
 3. Get this project: - `git clone 
+
+... TODO
+
+## Example
+
+[](./doc/example.png)
