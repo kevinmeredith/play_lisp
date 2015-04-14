@@ -9,8 +9,36 @@ This is a web-app that acts as a LISP REPL.
 	* `cd lisp_interpretter`
 	* `sbt`
 	* `publish-local`
-3. Get this project: - `git clone 
+3. Get this project: - `git clone https://github.com/kevinmeredith/play_lisp.git`
+4. Run it - `activator start`
+5. Issue HTTP request - `http://localhost:PORT/evaluate?currentExprs=10&previousExprs=` to run a sample expression.
+6. Then, use the UI to issue expressions.
 
-... TODO
+## Example
 
-[Example!](/doc/example.png)
+![Example](./doc/example.png)
+
+## History
+
+Note that, when evaluating an SExpression, this web app requires the *history*, 
+i.e. previous SExpressions to be included.
+
+That's necessary since the API does not hold state. 
+
+Each `GET /evaluate?currentExprs=...&previousExprs` is idempotent.
+
+The history is necessary due to the following scenario:
+
+User evaluates two SExpressions: `(define f 100)`, and then uses that variable to evaluate `(+ f 20)`.
+
+```
+(define f 100)
+(+ f 20) 
+```
+
+If the user then sends a second HTTP `GET /evaluate?...` request, which multiples `f` by 2, 
+then it's necessary to provide the **context** in which `f` exists.
+
+```
+f  // will evaluate to a Left((NoVarExists, ...)) if `f` is not defined, i.e. its historical commands are not evaluated.
+```
